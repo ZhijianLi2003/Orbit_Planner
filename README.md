@@ -3,11 +3,11 @@
 </p>
 
 
-<p align="center"><strong style="font-size: 3.0em;">Orbit-Planner: Towards Latent World Models for On-Orbit Obstacle Avoidance of Satellite Agent</strong></p>
+<h1 align="center"><strong>Orbit-Planner: Towards Latent World Models for On-Orbit Obstacle Avoidance of Satellite Agent</strong></h1>
 
 <p align="center">
   <strong>Zhijian Li</strong> · Chao Ren* · Peijin Wang · Xian Sun <br/>
-  </strong>Aerospace Information Research Institute, Chinese Academy of Sciences(AIRCAS)</strong> <br/>
+  Aerospace Information Research Institute, Chinese Academy of Sciences (AIRCAS)<br/>
 </p>
 
 
