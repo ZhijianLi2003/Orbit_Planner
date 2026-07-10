@@ -3,7 +3,7 @@
 </p>
 
 
-<p align="center"><strong style="font-size: 1.5em;">Orbit-Planner: Towards Latent World Models for On-Orbit Obstacle Avoidance of Satellite Agent</strong></p>
+<p align="center"><strong style="font-size: 3.0em;">Orbit-Planner: Towards Latent World Models for On-Orbit Obstacle Avoidance of Satellite Agent</strong></p>
 
 <p align="center">
   <strong>Zhijian Li</strong> · Chao Ren* · Peijin Wang · Xian Sun <br/>
