@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Checkpoints (keep directory via checkpoints/.gitkeep)
+checkpoints/*
+!checkpoints/.gitkeep
+
+# Data files (keep directory via data/.gitkeep)
+data/*
+!data/.gitkeep
+
+config/*
+!config/.gitkeep
+
+# Logs (keep directory via logs/.gitkeep)
+logs/*
+!logs/.gitkeep
+
+# Eval outputs
+eval_output/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# W&B
+wandb/
