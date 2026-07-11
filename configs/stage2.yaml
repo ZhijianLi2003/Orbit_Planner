@@ -1,0 +1,4 @@
+# ======== Orbit Planner Stage 2 training config ========
+# Freeze Stage 1 encoder + predictor; train Physics Prober
+
+# The paper is currently under review. Once the review is completed, the parameters will be made public.

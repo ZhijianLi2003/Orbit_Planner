@@ -29,7 +29,7 @@
 </p>
 
 
-## Framework
+<!-- ## Framework
 
 <p align="center">
   <img src="assets/fig2_framework.png" alt="Orbit-Planner framework" width="90%"/>
@@ -38,4 +38,4 @@
 Orbit-Planner is a two-stage latent world model for on-orbit obstacle avoidance:
 
 - **Stage 1**: RGB observations and proprioceptive states are encoded into latent dynamics; an AdaLN Transformer predicts future latents with auxiliary depth supervision.
-- **Stage 2**: A physics-inspired prober maps frozen latent rollouts to interpretable spacecraft states for planning and control.
+- **Stage 2**: A physics-inspired prober maps frozen latent rollouts to interpretable spacecraft states for planning and control. -->
