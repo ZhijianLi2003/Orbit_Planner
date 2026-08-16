@@ -3,9 +3,6 @@ Orbit Planner Stage 2 training script.
 
 Freeze Stage 1 encoder + predictor; train Physics Prober.
 
-Usage:
-
-    CUDA_VISIBLE_DEVICES=0 PYTHONUNBUFFERED=1 python scripts/train_stage2.py --config configs/stage2.yaml --stage1_ckpt checkpoints/stage1_worldmodel.pt > logs/train_stage2.log 2>&1 &
 """
 
 import argparse
@@ -378,23 +375,25 @@ def main():
                        **{f"train/{k}": v for k, v in avg.items()}})
 
         # ---- validation ----
-        val_metrics = validate(
-            world_model, prober, prober_criterion,
-            val_loader, H, device, cfg, use_amp, amp_dtype_torch,
-        )
-        print(f"  [Val] "
-              + " | ".join(f"{k}={v:.4f}" for k, v in val_metrics.items()))
+        val_interval = tc.get("val_interval", 1)
+        if (epoch + 1) % val_interval == 0 or epoch == tc["epochs"] - 1:
+            val_metrics = validate(
+                world_model, prober, prober_criterion,
+                val_loader, H, device, cfg, use_amp, amp_dtype_torch,
+            )
+            print(f"  [Val] "
+                  + " | ".join(f"{k}={v:.4f}" for k, v in val_metrics.items()))
 
-        if use_wandb:
-            wandb.log({f"val/{k}": v for k, v in val_metrics.items()})
+            if use_wandb:
+                wandb.log({f"val/{k}": v for k, v in val_metrics.items()})
 
-        # ---- save best ----
-        val_loss = val_metrics.get("total_loss", float("inf"))
-        if val_loss < best_val_loss:
-            best_val_loss = val_loss
-            _save_checkpoint(out_dir / "best_stage2.pt",
-                             epoch, prober, optimizer, cfg)
-            print(f"  ★ Best val_loss={val_loss:.4f}, saved → best_stage2.pt")
+            # ---- save best ----
+            val_loss = val_metrics.get("total_loss", float("inf"))
+            if val_loss < best_val_loss:
+                best_val_loss = val_loss
+                _save_checkpoint(out_dir / "stage2_best.pt",
+                                 epoch, prober, optimizer, cfg)
+                print(f"  ★ Best val_loss={val_loss:.4f}, saved → stage2_best.pt")
 
         # ---- periodic save ----
         if (epoch + 1) % tc["save_interval"] == 0 or epoch == tc["epochs"] - 1:

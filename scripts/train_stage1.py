@@ -1,10 +1,6 @@
 """
 Orbit Planner Stage 1 training script.
 
-Usage (run from project root Orbit_Planner/):
-    CUDA_VISIBLE_DEVICES=0 PYTHONUNBUFFERED=1 nohup python scripts/train_stage1.py --config configs/stage1.yaml > logs/train_stage1.log 2>&1 &
-
-
 """
 
 import argparse

@@ -1,3 +1,62 @@
-# ======== Orbit Planner Stage 1 training config ========
+# ======== Orbit Planner Stage 1 训练配置 ========
 
-# The paper is currently under review. Once the review is completed, the parameters will be made public.
+data:
+  h5_path: data/dataset_flat.h5
+  window_size: 20
+  window_stride: 5        # 窗口起点每隔5步采一个，约5×加速
+  train_ratio: 0.9
+  augment: true
+
+model:
+  # ViT 视觉编码器
+  img_size: 224
+  patch_size: 14
+  vit_dim: 192
+  vit_depth: 12
+  vit_heads: 3
+  vit_mlp_ratio: 4.0
+
+  # 状态 / 动作编码器
+  state_dim: 16
+  state_hidden: 128
+  state_emb_dim: 64
+  action_dim: 8
+  action_hidden: 128
+
+  # Latent 空间
+  latent_dim: 256
+
+  # Predictor (AdaLN Transformer)
+  pred_depth: 6
+  pred_heads: 4
+  pred_mlp_ratio: 4.0
+  pred_dropout: 0.1
+  max_seq_len: 64
+
+training:
+  batch_size: 128
+  lr: 1.0e-5
+  weight_decay: 0.05
+  epochs: 50
+  warmup_epochs: 3
+  grad_clip: 1.0
+
+  # 损失权重
+  lambda_sigreg: 0.1
+  lambda_depth: 0.1
+  sigreg_projections: 512   # 小 batch 下 512 足够
+
+  # 系统
+  num_workers: 4
+  device: cuda
+  seed: 42
+  mixed_precision: bf16
+
+  # 日志 / 保存
+  postfix_window: 20       # tqdm 显示：最近 N 步滑动平均（每步刷新）
+  log_interval: 50          # 每 N 步打印一行详细日志
+  val_interval: 50            # 每 N epoch 验证一次
+  save_interval: 1         # 每 N epoch 保存
+  output_dir: checkpoints
+  wandb_project: Orbit_Planner
+  wandb_entity: ~            # 设为你的 wandb entity, ~ 表示不启用

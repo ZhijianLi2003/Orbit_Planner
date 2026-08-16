@@ -5,14 +5,11 @@ Metrics:
   1. Single-step prediction error (teacher forcing): z_hat_t vs z_{t+1}
   2. Multi-step autoregressive rollout error: latent prediction decay over horizon
   3. Depth prediction visualization: save GT vs Pred comparison plots
-  4. Latent space visualization: PCA/t-SNE of z distribution
-
-Usage:
-    CUDA_VISIBLE_DEVICES=1 PYTHONUNBUFFERED=1 python scripts/eval_stage1.py --ckpt checkpoints/stage1_worldmodel.pt --num_trajs 100 > logs/eval_stage1.log 2>&1 &
 
 """
 
 import argparse
+import random
 import sys
 from pathlib import Path
 
@@ -246,6 +243,8 @@ def main():
                         help="Rollout context length")
     parser.add_argument("--output_dir", type=str, default="eval_output/stage1",
                         help="Output directory for results")
+    parser.add_argument("--seed", type=int, default=42,
+                        help="Random seed for sampling evaluation trajectories")
     parser.add_argument("--device", type=str, default="cuda")
     args = parser.parse_args()
 
@@ -268,17 +267,20 @@ def main():
         save_dir = ROOT / save_dir
     save_dir.mkdir(parents=True, exist_ok=True)
 
-    # Select evaluation trajectories from validation set
+    # Randomly sample evaluation trajectories from the validation set.
+    # Sampled keys are sorted afterwards to keep HDF5 reads roughly sequential.
     all_keys = list_trajectory_keys(h5_path)
     n_train = int(len(all_keys) * cfg["data"]["train_ratio"])
     val_keys = all_keys[n_train:]
-    eval_keys = val_keys[:args.num_trajs]
+    n_eval = min(args.num_trajs, len(val_keys))
+    eval_keys = sorted(random.Random(args.seed).sample(val_keys, n_eval))
 
     print(f"\n{'=' * 60}")
     print(f"Stage 1 Evaluation")
     print(f"  Checkpoint: {ckpt_path.name}")
     print(f"  Dataset:    {h5_path}")
-    print(f"  Eval trajs: {len(eval_keys)} (from val set)")
+    print(f"  Eval trajs: {len(eval_keys)} / {len(val_keys)} (random from val set)")
+    print(f"  Seed:       {args.seed}")
     print(f"  Context H:  {args.context_len}")
     print(f"  Output:     {save_dir}")
     print(f"{'=' * 60}\n")

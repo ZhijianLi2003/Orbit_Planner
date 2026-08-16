@@ -1,0 +1,11 @@
+# Keep repository text files compatible with Linux.
+* text=auto eol=lf
+
+# Binary assets and model data must not be line-ending normalized.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.h5 binary
+*.pt binary
+*.ptt binary

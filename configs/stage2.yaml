@@ -1,4 +1,71 @@
 # ======== Orbit Planner Stage 2 training config ========
 # Freeze Stage 1 encoder + predictor; train Physics Prober
 
-# The paper is currently under review. Once the review is completed, the parameters will be made public.
+data:
+  h5_path: data/dataset_flat.h5   #data/dataset1_flat.h5
+  window_size: 20
+  window_stride: 5
+  train_ratio: 0.9
+  augment: false          # Stage 2 does not need RGB augmentation
+  context_steps: 8        # first H steps as encoder context
+                          # remaining T=12 steps as prober supervision
+
+stage1:
+  checkpoint: checkpoints/stage1_world_model.pt   # best Stage 1 weights
+
+# Reuse Stage 1 model architecture (must match checkpoint)
+model:
+  img_size: 224
+  patch_size: 14
+  vit_dim: 192
+  vit_depth: 12
+  vit_heads: 3
+  vit_mlp_ratio: 4.0
+  state_dim: 16
+  state_hidden: 128
+  state_emb_dim: 64
+  action_dim: 8
+  action_hidden: 128
+  latent_dim: 256
+  pred_depth: 6
+  pred_heads: 4
+  pred_mlp_ratio: 4.0
+  pred_dropout: 0.1
+  max_seq_len: 64
+
+prober:
+  hidden_dim: 256
+  num_layers: 3
+  dt: 0.04                # simulation timestep (seconds), 25 Hz
+training:
+  batch_size: 256          # Stage 2 trains a small network; larger batch is fine
+  lr: 3.0e-4
+  weight_decay: 0.01
+  epochs: 25
+  warmup_epochs: 3
+  grad_clip: 1.0
+
+  # Loss weights
+  lambda_prober: 1.0
+
+  # Prober component weights
+  w_pos: 1.0
+  w_vel: 1.0
+  w_rot: 1.0
+  w_omega: 1.0
+  w_fuel: 0.1
+
+  # System
+  num_workers: 4
+  device: cuda
+  seed: 42
+  mixed_precision: bf16
+
+  # Logging / checkpointing
+  postfix_window: 20
+  log_interval: 50
+  save_interval: 1
+  val_interval: 41
+  output_dir: checkpoints
+  wandb_project: Orbit_Planner
+  wandb_entity: ~
