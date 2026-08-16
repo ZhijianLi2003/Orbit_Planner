@@ -203,4 +203,4 @@ If you find Orbit-Planner useful in your research, please consider citing our wo
 
 ## 🔭 Future Work
 
-Our future work will focus on on-orbit perception, scene understanding, and autonomous navigation for spacecraft, as well as broader applications of distributed foundation models in the aerospace domain. If you like our work, please consider giving this repository a ⭐.
+Our future work will focus on on-orbit perception, scene understanding, and autonomous navigation for spacecraft, as well as broader applications of distributed foundation models in the aerospace domain. 
