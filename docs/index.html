@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Orbit-Planner is a latent world model for on-orbit obstacle avoidance by autonomous satellite agents."
+    />
+    <meta name="theme-color" content="#05070d" />
+    <title>Orbit-Planner | Latent World Models for Satellite Navigation</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main>
+      <header class="site-header">
+        <a class="brand" href="#top" aria-label="Orbit-Planner home">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          Orbit-Planner
+        </a>
+        <nav aria-label="Main navigation">
+          <a href="#demo">Demo</a>
+          <a href="#dataset">Dataset</a>
+          <a href="#framework">Framework</a>
+          <a href="#results">Results</a>
+          <a href="#citation">Cite</a>
+        </nav>
+      </header>
+
+      <section class="hero" id="top">
+        <div class="star-field" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">Latent world models · On-orbit autonomy</p>
+            <h1>
+              Orbit-Planner
+              <span>
+                Towards Latent World Models for On-Orbit Obstacle Avoidance of
+                Satellite Agent
+              </span>
+            </h1>
+            <div class="authors" aria-label="Authors">
+              <span>
+                <a
+                  class="author-link"
+                  href="https://zhijianli2003.github.io/"
+                  target="_blank"
+                  rel="noreferrer"
+                >Zhijian Li</a><sup>1,2</sup>
+              </span>
+              <span>Chao Ren<sup>2,*</sup></span>
+              <span>Peijin Wang<sup>2</sup></span>
+              <span>Xian Sun<sup>2</sup></span>
+            </div>
+            <p class="affiliation">
+              <span class="affiliation-line">
+                <sup>1</sup>University of Chinese Academy of Sciences
+              </span>
+              <span class="affiliation-line">
+                <sup>2</sup>Key Laboratory of Target Cognition and Application
+                Technology (TCAT), Aerospace Information Research Institute,
+                Chinese Academy of Sciences
+              </span>
+            </p>
+            <p class="hero-summary">
+              A CubeSat agent that imagines action-conditioned futures in latent
+              space, recovers physical state changes, and plans collision-free
+              maneuvers online.
+            </p>
+            <div class="hero-actions">
+              <a
+                class="button primary"
+                href="https://arxiv.org/abs/0000.00000"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  class="button-icon"
+                  src="assets/arxiv.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+                Paper
+              </a>
+              <a
+                class="button"
+                href="https://github.com/ZhijianLi2003/Orbit_Planner"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  class="button-icon"
+                  src="assets/github.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+                Code
+              </a>
+              <a
+                class="button"
+                href="https://huggingface.co/datasets/warriorLZJ/Orbit_Planner"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <img
+                  class="button-icon"
+                  src="assets/huggingface.svg"
+                  alt=""
+                  aria-hidden="true"
+                />
+                Dataset
+              </a>
+            </div>
+          </div>
+          <figure class="hero-overview">
+            <img
+              src="assets/overview.png"
+              alt="Overview of the CubeSat obstacle-avoidance task and Orbit-Planner pipeline"
+            />
+          </figure>
+        </div>
+        <a class="scroll-cue" href="#demo" aria-label="Scroll to demo">
+          Explore <span aria-hidden="true">↓</span>
+        </a>
+      </section>
+
+      <section class="content-section demo-section" id="demo">
+        <div class="section-heading">
+          <p class="section-index">01 / Demo</p>
+          <h2>Imagine first and move second.</h2>
+          <p>
+            Orbit-Planner continuously predicts future latent states, decodes
+            physical states, and replans before executing the next control action.
+          </p>
+        </div>
+        <figure class="media-frame demo-frame">
+          <img
+            src="assets/OrbitPlanner_Demo.gif"
+            alt="Orbit-Planner CubeSat navigating through orbital obstacles in simulation"
+          />
+          <figcaption>
+            Closed-loop on-orbit obstacle avoidance in Isaac Sim. The side
+            panels show the egocentric observation and predicted depth grid.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="content-section dataset-section" id="dataset">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="section-index">02 / Dataset</p>
+            <h2>Behaviorally diverse trajectories</h2>
+          </div>
+          <p>
+            8,000 trajectories are collected with randomized obstacles and
+            lighting: 7,200 for training and 800 for testing. Three behavioral
+            modes expose the model to safe, unsafe, and exploratory motion.
+          </p>
+        </div>
+        <div class="dataset-grid">
+          <article class="dataset-card">
+            <div class="card-image">
+              <img src="assets/expert.gif" alt="Expert trajectory sample" />
+              <span class="card-number">01</span>
+            </div>
+            <div class="card-copy">
+              <div>
+                <h3>Expert</h3>
+                <span class="tag">Goal-directed</span>
+              </div>
+              <p>
+                RRT* planning with PD tracking, wider safety margins, and low
+                control noise.
+              </p>
+            </div>
+          </article>
+
+          <article class="dataset-card">
+            <div class="card-image">
+              <img src="assets/risky.gif" alt="Risky trajectory sample" />
+              <span class="card-number">02</span>
+            </div>
+            <div class="card-copy">
+              <div>
+                <h3>Risky</h3>
+                <span class="tag">Collision-prone</span>
+              </div>
+              <p>
+                Direct goal-seeking trajectories without obstacle-aware
+                planning.
+              </p>
+            </div>
+          </article>
+
+          <article class="dataset-card">
+            <div class="card-image">
+              <img src="assets/explore.gif" alt="Exploratory trajectory sample" />
+              <span class="card-number">03</span>
+            </div>
+            <div class="card-copy">
+              <div>
+                <h3>Exploratory</h3>
+                <span class="tag">High-diversity</span>
+              </div>
+              <p>
+                Strong random action noise for broad, unstructured state-space
+                exploration.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="content-section" id="framework">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="section-index">03 / Framework</p>
+            <h2>A two-stage latent world model</h2>
+          </div>
+          <p>
+            Stage I learns a multimodal predictive representation from RGB,
+            spacecraft state, and control actions. Stage II freezes the world
+            model, probes imagined physical changes, and plans with recovered
+            obstacle geometry.
+          </p>
+        </div>
+        <figure class="media-frame figure-frame">
+          <a
+            href="assets/fig2_framework.png"
+            target="_blank"
+            aria-label="Open the framework figure at full resolution"
+          >
+            <img
+              src="assets/fig2_framework.png"
+              alt="Two-stage Orbit-Planner framework showing world-model pre-training and physics probing for planning"
+            />
+          </a>
+          <figcaption>
+            World-model pre-training → action-conditioned latent rollout →
+            physics probing and online trajectory planning.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="content-section result-section" id="results">
+        <div class="section-heading split-heading">
+          <div>
+            <p class="section-index">04 / Results</p>
+            <h2>Robust across speed and density</h2>
+          </div>
+          <p>
+            Across six unseen settings with one, three, or five obstacles and
+            two initial velocities, Orbit-Planner consistently outperforms the
+            reactive imitation-learning baseline.
+          </p>
+        </div>
+        <div class="result-highlight">
+          <div>
+            <span>Orbit-Planner</span>
+            <strong>91.7%</strong>
+          </div>
+          <div class="comparison-line" aria-hidden="true"><span></span></div>
+          <div class="baseline">
+            <span>Diffusion Policy</span>
+            <strong>55.0%</strong>
+          </div>
+        </div>
+        <figure class="media-frame figure-frame result-figure">
+          <a
+            href="assets/result.png"
+            target="_blank"
+            aria-label="Open the results chart at full resolution"
+          >
+            <img
+              src="assets/result.png"
+              alt="Success rates of Orbit-Planner and Diffusion Policy across six obstacle avoidance settings"
+            />
+          </a>
+          <figcaption>
+            Closed-loop navigation success in Isaac Sim.
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="citation-section" id="citation">
+        <div class="citation-inner">
+          <div class="section-heading">
+            <p class="section-index">05 / Citation</p>
+            <h2>Build on Orbit-Planner</h2>
+            <p>
+              Orbit-Planner will be available on arXiv. The identifier below
+              is a temporary placeholder and will be updated after upload.
+            </p>
+          </div>
+          <div class="code-card">
+            <button id="copy-citation" type="button" aria-live="polite">
+              Copy BibTeX
+            </button>
+            <pre><code id="bibtex">@article{li2026orbitplanner,
+  title   = {Orbit-Planner: Towards Latent World Models for On-Orbit Obstacle Avoidance of Satellite Agent},
+  author  = {Li, Zhijian and Ren, Chao and Wang, Peijin and Sun, Xian},
+  journal = {arXiv preprint arXiv:0000.00000},
+  year    = {2026}
+}</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <a class="brand footer-brand" href="#top">
+          <span class="brand-mark" aria-hidden="true"><span></span></span>
+          Orbit-Planner
+        </a>
+        <p>Latent world models for safer on-orbit autonomy.</p>
+        <p>© 2026 Orbit-Planner authors</p>
+      </footer>
+    </main>
+  </body>
+</html>
