@@ -31,7 +31,7 @@
 - [2026/07/11] 🔥 We release **Orbit-Planner** training & evaluation code, along with Stage 1 & Stage 2 pre-trained checkpoints. [Code](https://github.com/ZhijianLi2003/Orbit_Planner) [Checkpoints](https://huggingface.co/datasets/warriorLZJ/Orbit_Planner/tree/main)
 - [2026/08/07] 🔥 Our Paper was accepted by IEEE AP-GARSS 2026.
 - [2026/08/14] 🔥 The complete Orbit-Planner Orbital Evasion Dataset has been released on [Huggingface](https://huggingface.co/datasets/warriorLZJ/Orbit_Planner).
-- [Coming Soon] **Orbit-Planner** arXiv preprint will be available soon. [Paper](https://arxiv.org/abs/0000.00000)
+- [2026/08/17] 🔥 Our paper is now available on arXiv. [Paper](https://arxiv.org/abs/2608.16651)
 
 ## 🎬 Demo
 
@@ -196,7 +196,7 @@ If you find Orbit-Planner useful in your research, please consider citing our wo
 @article{li2026orbitplanner,
   title   = {Orbit-Planner: Towards Latent World Models for On-Orbit Obstacle Avoidance of Satellite Agent},
   author  = {Li, Zhijian and Ren, Chao and Wang, Peijin and Sun, Xian},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
+  journal = {arXiv preprint arXiv:2608.16651},
   year    = {2026}
 }
 ```
