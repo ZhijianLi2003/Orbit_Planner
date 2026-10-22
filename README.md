@@ -33,6 +33,7 @@
 - [2026/08/14] 🔥 The complete Orbit-Planner Orbital Evasion Dataset has been released on [Huggingface](https://huggingface.co/datasets/warriorLZJ/Orbit_Planner).
 - [2026/08/17] 🔥 Our paper is now available on arXiv. [Paper](https://arxiv.org/abs/2608.16651)
 - [2026/08/21] 🔥 Thanks to the WeChat official account “Visual Language Navigation” for sharing our work! [Link](https://mp.weixin.qq.com/s/vELXXvIb54p0sY9jcTZkFA)
+- [2026/10/22] 🔥 Orbit-Planner received a **Best Presentation Award** at IEEE AP-GARSS 2026!
 
 ## 🎬 Demo
 
